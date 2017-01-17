@@ -1,4 +1,4 @@
-  $('select').select2();
+$('select').select2();
 
 function loadJSON(callback) {
 
@@ -16,24 +16,23 @@ function loadJSON(callback) {
 
 function init() {
  loadJSON(function(response) {
-    var JSONFinal = JSON.parse(response);
+    var data = JSON.parse(response);
 
     var departamentos = $("#departamentos");
   	var ciudades = $("#ciudades");
 
-    for (var i = 0; i < JSONFinal.length; i++) {
-      departamentos.append('<option value="'+ i +'" >'+ JSONFinal[i]["departamento"] +'</option>');
+    for (var i = 0; i < data.length; i++) {
+      departamentos.append('<option value="'+ i +'" >'+ data[i]["departamento"] +'</option>');
     }
 
     departamentos.change(function(event) {
       ciudades.empty();
       var selected = $(this).val();
-      var ciudades_selected = JSONFinal[selected]["ciudades"];
+      var ciudades_selected = data[selected]["ciudades"];
 
       for (var j = 0; j < ciudades_selected.length ; j++) {
         ciudades.append('<option value="'+ j +'" >'+ ciudades_selected[j] +'</option>');
       }
-
     });
 
  });
